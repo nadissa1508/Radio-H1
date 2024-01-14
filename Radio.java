@@ -15,8 +15,8 @@ public class Radio {
         status = true;
         actualStation = 530.0;
         stations = new double[12];
-        this.stationsAM = new double[12];
-        this.stationsFM = new double[12];
+        this.amStations = new double[12];
+        this.fmStations = new double[12];
         this.isAm = true;
         this.currentStation = 530;
     }
