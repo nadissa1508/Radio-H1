@@ -23,10 +23,12 @@ public class Radio {
 
     public void saveStation(int buttonId, double station) {
         if (!isOn) {
+            //Verifica si el radio esta encendido (!isOn = isOf) de lo contrario devuelve el print.
             System.out.println("El radio está apagado");
             return;
         }
         if (buttonId < 1 || buttonId > 12) {
+            //El boton no debe ser menos a 1 ni mayos a 12 (1 a 12)
             System.out.println("ID de botón inválido");
             return;
         }
@@ -47,13 +49,15 @@ public class Radio {
 
     public double selectStation(int buttonId) {
         if (!isOn) {
-            System.out.println("El radio está apagado");
+            //Mismo que saveStation
+            System.out.println("Verifique que el radio este encendido");
             return -1;
         }
         if (buttonId < 1 || buttonId > 12) {
-            System.out.println("ID de botón inválido");
+            System.out.println("Número de botón inválido");
             return -1;
         }
+        //Verifica en que emisora se encuentra antes de regresar la emisoria que el usuario guardó
         currentStation = isAm ? amStations[buttonId - 1] : fmStations[buttonId - 1];
         return currentStation;
     }
