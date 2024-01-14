@@ -5,6 +5,7 @@ public class Radio {
     private double[] stations; 
 
     public Radio(){
+        //AM -> true FM -> false
         frequency = true;
         status = true;
         stations = new double[12];
@@ -13,6 +14,17 @@ public class Radio {
     boolean isOn(){
         return status;
     }
+
+    void switchAMFM(){
+        frequency = !frequency;
+        if(frequency){
+            System.out.println("Frecuencia cambiada a AM");
+        }else{
+            System.out.println("Frecuencia cambiada a FM");
+        }
+    }
+
+    
 
     
 }
