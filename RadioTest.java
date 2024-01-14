@@ -1,4 +1,3 @@
-pubic class RadioTest {
-    @Test
-    
+public class RadioTest {
+
 }
