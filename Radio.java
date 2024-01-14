@@ -4,6 +4,10 @@ public class Radio {
     private boolean status;
     private double actualStation;
     private double[] stations; 
+    private boolean isAm;
+    private double currentStation;
+    private double[] amStations = new double[12];
+    private double[] fmStations = new double[12];
 
     public Radio(){
         //AM -> true FM -> false
@@ -11,10 +15,51 @@ public class Radio {
         status = true;
         actualStation = 530.0;
         stations = new double[12];
+        this.stationsAM = new double[12];
+        this.stationsFM = new double[12];
+        this.isAm = true;
+        this.currentStation = 530;
+    }
+
+    public void saveStation(int buttonId, double station) {
+        if (!isOn) {
+            System.out.println("El radio está apagado");
+            return;
+        }
+        if (buttonId < 1 || buttonId > 12) {
+            System.out.println("ID de botón inválido");
+            return;
+        }
+        if (isAm) {
+            amStations[buttonId - 1] = station;
+        } else {
+            fmStations[buttonId - 1] = station;
+        }
+    }
+
+    public boolean isAm() {
+        return isAm;
     }
 
     boolean isOn(){
         return status;
+    }
+
+    public double selectStation(int buttonId) {
+        if (!isOn) {
+            System.out.println("El radio está apagado");
+            return -1;
+        }
+        if (buttonId < 1 || buttonId > 12) {
+            System.out.println("ID de botón inválido");
+            return -1;
+        }
+        currentStation = isAm ? amStations[buttonId - 1] : fmStations[buttonId - 1];
+        return currentStation;
+    }
+
+    public void switchOnOff() {
+        isOn = !isOn;
     }
 
     void switchAMFM(){
