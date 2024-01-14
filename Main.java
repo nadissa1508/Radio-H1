@@ -34,14 +34,19 @@ public class Main {
 
             if(option >0 && option < 7){
                 if(option == 1){
+                    System.out.println("\n1");
 
                 }else if(option == 2){
+                    System.out.println("\n2");
 
                 }else if(option == 3){
+                    System.out.println("\n3");
 
                 }else if(option == 4){
+                    System.out.println("\n4");
 
                 }else if(option == 5){
+                    System.out.println("\n5");
 
                 }
             }else{
