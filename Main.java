@@ -1,7 +1,7 @@
 /**
  * Universidad del Valle de Guatemala
  * @author Angie Nadissa Vela López, 23764
- * @author Mia Alejandra Fuentes Merida, 00000
+ * @author Mia Alejandra Fuentes Merida, 23775
  * @description clase que funciona como interfaz para que el usuario pueda utilizar el sistema,
  * aquí se encuentra el menú principal con las funcionalidades del radio
  * @date creación 09/01/2023 última modificación 16/01/2023
