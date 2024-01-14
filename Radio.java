@@ -15,10 +15,10 @@ public class Radio {
         status = true;
         actualStation = 530.0;
         stations = new double[12];
-        this.amStations = new double[12];
-        this.fmStations = new double[12];
-        this.isAm = true;
-        this.currentStation = 530;
+        amStations = new double[12];
+        fmStations = new double[12];
+        isAm = true;
+        currentStation = 530;
     }
 
     public void saveStation(int buttonId, double station) {
@@ -63,8 +63,10 @@ public class Radio {
     }
 
     public void switchOnOff() {
-        isOn = !isOn;
+        //se corrigio este método
+        status = !status;
     }
+    
 
     void switchAMFM(){
         frequency = !frequency;
