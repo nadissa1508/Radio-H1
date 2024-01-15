@@ -1,101 +1,102 @@
-public class Radio {
+/**
+ * Universidad del Valle de Guatemala
+ * 
+ * @author Angie Nadissa Vela López, 23764
+ * @author Mia Alejandra Fuentes Merida, 23775
+ * @description clase que modela el funcionamiento de un radio
+ * @date creación 09/01/2023 última modificación 16/01/2023
+ */
+public class Radio implements IRadio {
 
-    private boolean frequency;
+    private boolean flagSelectStation;
     private boolean status;
-    private double actualStation;
-    private double[] stations; 
+    // private double actualStation;
     private boolean isAm;
     private double currentStation;
-    private double[] amStations = new double[12];
-    private double[] fmStations = new double[12];
+    private double[] stationsAM;
+    private double[] stationsFM;
 
-    public Radio(){
-        //AM -> true FM -> false
-        frequency = true;
-        status = true;
-        actualStation = 530.0;
-        stations = new double[12];
+    public Radio() {
+        this.flagSelectStation = false;
+        this.status = false;
+        // this.actualStation = 530.0;
+        this.isAm = true; // AM -> true FM -> false
         this.stationsAM = new double[12];
         this.stationsFM = new double[12];
-        this.isAm = true;
         this.currentStation = 530;
     }
 
     public void saveStation(int buttonId, double station) {
-        if (!isOn) {
-            //Verifica si el radio esta encendido (!isOn = isOf) de lo contrario devuelve el print.
-            System.out.println("El radio está apagado");
-            return;
-        }
+        
         if (buttonId < 1 || buttonId > 12) {
-            //El boton no debe ser menos a 1 ni mayos a 12 (1 a 12)
+            // El boton no debe ser menos a 1 ni mayor a 12 (1 a 12)
             System.out.println("ID de botón inválido");
             return;
         }
-        if (isAm) {
-            amStations[buttonId - 1] = station;
+        if (isAM()) {
+            stationsAM[buttonId - 1] = station;
         } else {
-            fmStations[buttonId - 1] = station;
+            stationsFM[buttonId - 1] = station;
         }
-    }
+        System.out.println("Estación guardada con éxito!");
 
-    public boolean isAm() {
-        return isAm;
-    }
-
-    boolean isOn(){
-        return status;
-    }
-
-    public double selectStation(int buttonId) {
-        if (!isOn) {
-            //Mismo que saveStation
-            System.out.println("Verifique que el radio este encendido");
-            return -1;
-        }
-        if (buttonId < 1 || buttonId > 12) {
-            System.out.println("Número de botón inválido");
-            return -1;
-        }
-        //Verifica en que emisora se encuentra antes de regresar la emisoria que el usuario guardó
-        currentStation = isAm ? amStations[buttonId - 1] : fmStations[buttonId - 1];
-        return currentStation;
     }
 
     public void switchOnOff() {
-        isOn = !isOn;
+        status = !status;
     }
 
-    void switchAMFM(){
-        frequency = !frequency;
-        if(frequency){
-            System.out.println("Frecuencia cambiada a AM");
-        }else{
-            System.out.println("Frecuencia cambiada a FM");
+    public void switchAMFM() {
+        isAm = !isAm;
+    }
+
+    public double selectStation(int buttonId) {
+
+        if (buttonId < 1 || buttonId > 12) {
+            System.out.println("Número de botón inválido");
+            currentStation = -1;
+        } else {
+            // Verifica en que emisora se encuentra antes de regresar la emisoria que el
+            // usuario guardó
+            currentStation = isAm ? stationsAM[buttonId - 1] : stationsFM[buttonId - 1];
+            flagSelectStation = true;
         }
+
+        return currentStation;
     }
 
-    double nextStation(){
-        double station = 0.0, add = 0.0, range = 0.0;
+    public boolean isAM() {
+        return isAm;
+    }
 
-        if(isAM()){
+    public boolean isOn() {
+        return status;
+    }
+
+    public double nextStation() {
+        double add = 0.0, range = 0.0;
+
+        if (isAM()) {
             add = 10;
             range = 1610;
-        }else{
+        } else {
             add = 0.2;
-            range= 107.9;
+            range = 107.9;
         }
 
-        station += add;
-
-        if((station > range) && (add == 10)){
-            station = 530;
-        }else if((station > range) && (add == 107.9)){
-            station = 87.9;
+        if (!flagSelectStation && !isAM()) {
+            currentStation = 87.9;
         }
 
-        return station;
-    }    
+        currentStation += add;
 
-    
+        if ((currentStation > range) && (add == 10)) {
+            currentStation = 530;
+        } else if ((currentStation > range) && (add == 107.9)) {
+            currentStation = 87.9;
+        }
+
+        return currentStation;
+    }
+
 }
