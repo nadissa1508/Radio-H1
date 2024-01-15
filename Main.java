@@ -23,7 +23,7 @@
              System.out.println("\nBIENVENIDO!");
              System.out.println("\n***************************");
              System.out.println(
-                     "\n\n1.Prender el radio \n2.Cambiar de AM a FM \n3.Cambiar emisora \n4.Guardar Emisora \n5.Seleccionar emisora \n6.Apagar el radio ");
+                     "\n\n1.Prender el radio \n2.Cambiar de AM a FM \n3.Siguiente emisora \n4.Guardar Emisora \n5.Seleccionar emisora \n6.Apagar el radio ");
              System.out.println("\nSeleccione su opción: ");
              opUser = teclado.nextLine();
  

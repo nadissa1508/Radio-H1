@@ -48,6 +48,7 @@ public class Radio implements IRadio {
 
     public void switchAMFM() {
         isAm = !isAm;
+        flagSelectStation = false;
     }
 
     public double selectStation(int buttonId) {
@@ -73,7 +74,28 @@ public class Radio implements IRadio {
         return status;
     }
 
+    public void verifyStation() {
+        if (flagSelectStation) {
+            if (currentStation == 0.0) {
+                if (isAM()) {
+                    currentStation = 530;
+                } else {
+                    currentStation = 87.9;
+                }
+            }
+
+        } else {
+            if (isAM()) {
+                currentStation = 530;
+            } else {
+                currentStation = 87.9;
+            }
+        }
+    }
+
     public double nextStation() {
+
+        verifyStation();
         double add = 0.0, range = 0.0;
 
         if (isAM()) {
@@ -84,10 +106,6 @@ public class Radio implements IRadio {
             range = 107.9;
         }
 
-        if (!flagSelectStation && !isAM()) {
-            currentStation = 87.9;
-        }
-
         currentStation += add;
 
         if ((currentStation > range) && (add == 10)) {
@@ -95,7 +113,7 @@ public class Radio implements IRadio {
         } else if ((currentStation > range) && (add == 107.9)) {
             currentStation = 87.9;
         }
-
+        flagSelectStation = true;
         return currentStation;
     }
 
