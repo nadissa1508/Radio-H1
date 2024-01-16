@@ -1,3 +1,10 @@
+/**
+*  Universidad del Valle de Guatemala
+* @author Angie Nadissa Vela López, 23764
+* @author Mia Alejandra Fuentes Merida, 23775
+* @description Clase para realizar las pruebas unitarias del sistema
+* @date creación 09/01/2023 última modificación 16/01/2023
+*/
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +33,9 @@ public class RadioTest {
     public void testSelectStation() {
         radio.switchOnOff(); // Enciende el radio
         radio.switchAMFM();  // Cambia a FM
-        radio.saveStation(1, 600); // Guarda una estación en el botón 
+        radio.saveStation(1, 88.1); // Guarda una estación en el botón 
         double result = radio.selectStation(1);
-        assertEquals(600.0, result, 0.01); 
+        assertEquals(88.1, result, 0.01); 
     }
 
     // Prueba para guardar una estación cuando el botón es inválido
@@ -61,7 +68,9 @@ public class RadioTest {
     // Prueba para verficar el avance del dial en las emisoras
     @Test
     public void testNextStationWorksCorrectly() {
-        radio.switchOnOff(); // Enciende el radio
+        // Enciende el radio, guarda y selecciona una emisora, luego prueba
+        //que nextStation regrese a la emisora inicial 530 (estamos en frecuencia AM)
+        radio.switchOnOff(); 
         radio.saveStation(1, 1610);
         radio.selectStation(1);
         double inicialStation = radio.nextStation();
