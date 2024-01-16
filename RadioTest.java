@@ -25,7 +25,8 @@ public class RadioTest {
     @Test
     public void testSelectStationWithInvalidButton() {
         double selectedStation = radio.selectStation(0); //seleccionar una estación con un botón inválido
-        assertEquals(-1, selectedStation, 0.01);
+        //falla porque como no existe boton 0 se devuelve -1 en lugar de una emisora
+        assertEquals(530, selectedStation, 0.01);
     }
 
      // guardar estacion en el que se encuentra el radio
@@ -43,7 +44,7 @@ public class RadioTest {
     public void testSaveStation_invalidButtonId() {
         int invalidButtonId = 15;
         double station = 101.5;
-        radio.saveStation(invalidButtonId, station); // Verifica que el mensaje de error sea el esperado
+        radio.saveStation(invalidButtonId, station);// Verifica que el mensaje de error sea el esperado
     }
 
     // Prueba para el método switchOnOff cuando el radio está apagado
